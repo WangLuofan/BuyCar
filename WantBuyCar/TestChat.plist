@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>direction</key>
+		<string>from</string>
+		<key>date</key>
+		<string>2014-03-17 10:01</string>
+		<key>message</key>
+		<string>您好，您需要的那款车，需要提前三个月预订，可以到店里来详谈哦！</string>
+	</dict>
+	<dict>
+		<key>direction</key>
+		<string>to</string>
+		<key>date</key>
+		<string>2014-03-17 10:02</string>
+		<key>message</key>
+		<string>嗯，好的。谢谢您哦！可以发一下您门店的路线吗？？</string>
+	</dict>
+	<dict>
+		<key>direction</key>
+		<string>from</string>
+		<key>date</key>
+		<string>今天 10:01</string>
+		<key>message</key>
+		<string>好的，稍等下哦。</string>
+	</dict>
+	<dict>
+		<key>direction</key>
+		<string>from</string>
+		<key>date</key>
+		<string>今天 10:02</string>
+		<key>message</key>
+		<string>地址：长沙市岳麓区岳麓大道375号</string>
+	</dict>
+	<dict>
+		<key>direction</key>
+		<string>from</string>
+		<key>date</key>
+		<string>今天 10:03</string>
+		<key>message</key>
+		<string>想买个落地不超过十五万的车，男，二十二岁，家庭用车，目前在考虑起亚k3，k4，福克斯，大众等等，大家有什么好的推荐没有？</string>
+	</dict>
+</array>
+</plist>

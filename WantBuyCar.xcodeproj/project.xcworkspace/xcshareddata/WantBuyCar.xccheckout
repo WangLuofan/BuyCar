@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8F804055-40DF-4379-8FF7-DBD34B1101B3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WantBuyCar</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>73B5089BB451F89BDCFF3EB0DD395063982299B4</key>
+		<string>github.com:WangLuofan/BuyCar.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WantBuyCar.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>73B5089BB451F89BDCFF3EB0DD395063982299B4</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:WangLuofan/BuyCar.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>73B5089BB451F89BDCFF3EB0DD395063982299B4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>73B5089BB451F89BDCFF3EB0DD395063982299B4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WantBuyCar</string>
+		</dict>
+	</array>
+</dict>
+</plist>
