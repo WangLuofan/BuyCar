@@ -15,8 +15,7 @@
 #import "CLAlertView.h"
 #import "ConstantDef.h"
 
-@interface BuyerRegistViewController ()<CLSegmentedControlDelegate> {
-    NSString* sexualString;
+@interface BuyerRegistViewController () {
 }
 
 @end
@@ -28,23 +27,20 @@
     // Do any additional setup after loading the view.
     [self setTitle:@"买家注册"];
     
+    //0 字段名
+    //1 提示信息
+    //2 是否密码信息
+    //3 是否为全数字键盘
+    //4 键名
     NSArray* contentArray=@[
-                            @[@"姓名",@"姓名或者昵称",@"0",@"0"],
-                            @[@"登陆邮箱",@"登陆用户名",@"0",@"0"],
-                            @[@"联系方式",@"仅对好友公开",@"0",@"1"],
-                            @[@"登陆密码",@"六位数字、字母或者下划线",@"1",@"0"],
-                            @[@"确认密码",@"再次输入登陆密码",@"1",@"0"]
+                            @[@"姓名",@"姓名或者昵称",@"0",@"0",@"name"],
+                            @[@"登陆邮箱",@"登陆用户名",@"0",@"0",@"email"],
+                            @[@"联系方式",@"仅对好友公开",@"0",@"1",@"phone"],
+                            @[@"登陆密码",@"六位数字、字母或者下划线",@"1",@"0",@"password"],
+                            @[@"确认密码",@"再次输入登陆密码",@"1",@"0",@"confirmPassword"]
                             ];
     
-    sexualString = @"男";
-    
-    CLSegmentedControl* segmentCtrl=[[CLSegmentedControl alloc] initWithFrame:CGRectMake(10, 180, self.view.frame.size.width-20 ,50) style:CLSegmentedControlStyleRect];
-    [segmentCtrl addItemByTitle:@"男" Image:@"male"];
-    [segmentCtrl addItemByTitle:@"女" Image:@"female"];
-    [segmentCtrl setDelegate:self];
-    [self.view addSubview:segmentCtrl];
-    
-    [self addControlsWithArray:contentArray yOrigin:segmentCtrl.frame.origin.y+segmentCtrl.bounds.size.height];
+    [self addControlsWithArray:contentArray];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,29 +49,21 @@
 }
 
 -(void)completeRegistBtnClicked:(UIButton *)sender {
-    NSDictionary* dict = @{@"headerImageURL":((RegistButton*)self.registItemArray[0]).imageReferenceURL,
-                                           @"userName":[((RegistItemView*)self.registItemArray[1]) contentText],
-                                           @"sexualString":sexualString,
-                                           @"mailString":[((RegistItemView*)self.registItemArray[2]) contentText],
-                                           @"phoneNumber":[((RegistItemView*)self.registItemArray[3]) contentText],
-                                           @"firstPassword":[((RegistItemView*)self.registItemArray[4]) contentText],
-                           @"secondPassword":[((RegistItemView*)self.registItemArray[5]) contentText]};
+    NSDictionary* dict = @{@"headerImage":((RegistButton*)self.registItemDict[@"headerButton"]).headerImage,
+                                           @"userName":[((RegistItemView*)self.registItemDict[@"name"]) contentText],
+                                           @"mailString":[((RegistItemView*)self.registItemDict[@"email"]) contentText],
+                                           @"phoneNumber":[((RegistItemView*)self.registItemDict[@"phone"]) contentText],
+                                           @"firstPassword":[((RegistItemView*)self.registItemDict[@"password"]) contentText],
+                                           @"secondPassword":[((RegistItemView*)self.registItemDict[@"confirmPassword"]) contentText]};
+    
     NSString* message = [self formatErrorInfo:[self registUserWithDictionary:dict userType:RegistType_Buyer]];
     
     if(message.length!=0) {
         self.alertView = [[CLAlertView alloc] initWithTitle:@"错误" frame:CGRectMake(0, 0, 250, 200) message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [self.alertView show];
         return ;
-    }else {
-        self.alertView = [[CLAlertView alloc] initWithTitle:@"成功" frame:CGRectMake(0, 0, 250, 200) message:@"恭喜你，注册成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [self.alertView show];
     }
 
-    return ;
-}
-
--(void)segmentedControl:(CLSegmentedControl *)segmentedControl selectedItemIndex:(NSInteger)selectedItemIndex {
-    sexualString = (selectedItemIndex==0?@"男":@"女");
     return ;
 }
 

@@ -10,41 +10,19 @@
 
 @implementation RegistModel
 
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    [coder encodeObject:self.headerImageURL forKey:@"headerImageURL"];
-    [coder encodeObject:self.userName forKey:@"userName"];
-    [coder encodeObject:self.phoneNumber forKey:@"phoneNumber"];
-    [coder encodeObject:self.password forKey:@"password"];
-    
-    return ;
-}
-
--(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    
-    if(self) {
-        self.headerImageURL = (NSString*)[aDecoder decodeObjectForKey:@"headerImageURL"];
-        self.userName = (NSString*)[aDecoder decodeObjectForKey:@"userName"];
-        self.phoneNumber = (NSString*)[aDecoder decodeObjectForKey:@"phoneNumber"];
-        self.password = (NSString*)[aDecoder decodeObjectForKey:@"password"];
-    }
-    
-    return self;
-}
-
 -(RegistErrorType)setUserInfoWithDictionary:(NSDictionary *)userInfo {
-    self.headerImageURL = (NSString*)userInfo[@"headerImageURL"];
+    self.headerImage = (UIImage*)userInfo[@"headerImage"];
     self.userName = (NSString*)userInfo[@"userName"];
     self.phoneNumber = (NSString*)userInfo[@"phoneNumber"];
+    self.genderInfo = 1;
     
     if([(NSString*)userInfo[@"firstPassword"] isEqualToString:(NSString*)userInfo[@"secondPassword"]])
         self.password = (NSString*)userInfo[@"firstPassword"];
     else
         return ErrorTypePasswordDifferentError;
     
-    NSLog(@"%@",self.headerImageURL);
-    if(self.headerImageURL.length == 0)
+    NSLog(@"%@",self.headerImage);
+    if(self.headerImage == nil)
         return ErrorTypeEmptyHeaderImageError;
     
     //空串错误

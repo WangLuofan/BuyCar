@@ -10,4 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CLTabItem : CLButton
+
+-(void)setBadgeValue:(NSInteger)value;
+
 @end

@@ -101,6 +101,10 @@
     return ;
 }
 
+-(NSInteger)selectedItemByIndex {
+    return selectedSegmentedItem.tag;
+}
+
 -(void)segmentedItem:(CLSegmentedItem *)segmentedItem{
     [selectedSegmentedItem setSelected:NO];
     [segmentedItem setSelected:YES];

@@ -48,7 +48,19 @@
     tableCellArray = [[NSMutableArray alloc] init];
     [self decodeCommentProperty];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(leftButtonPressed:)];
+    
     return;
+}
+
+-(void)leftButtonPressed:(UIBarButtonItem*)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+    return ;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)decodeCommentProperty {

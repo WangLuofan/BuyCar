@@ -14,7 +14,7 @@ typedef enum {
 
 @interface RegistButton : UIButton
 
-@property(nonatomic,copy) NSString*   imageReferenceURL;
+@property(nonatomic,copy) UIImage* headerImage;
 -(void)setRegistButtonType:(RegistButtonType)buttonType;
 
 @end

@@ -10,4 +10,7 @@
 
 @interface SQLOperationManager : NSObject
 
++(instancetype)sharedInstance;
+-(void)openDatabase;
+
 @end

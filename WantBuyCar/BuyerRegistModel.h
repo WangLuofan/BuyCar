@@ -11,6 +11,5 @@
 @interface BuyerRegistModel : RegistModel
 
 @property(nonatomic,copy) NSString* mailString;
-@property(nonatomic,copy) NSString* sexualString;
 
 @end

@@ -95,6 +95,7 @@
 		B343DD1A1B0D8E4A00DB672C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A8B4321B0B3808005BECB6 /* libxml2.dylib */; };
 		B343DD1B1B0D8E4D00DB672C /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A8B42A1B0B37E9005BECB6 /* libstdc++.6.0.9.dylib */; };
 		B35AF0E91B09E51000079369 /* SUBBrandQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35AF0E81B09E51000079369 /* SUBBrandQueryModel.m */; };
+		B39125DD1B13FDF300C3D1EF /* SQLOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B39125DC1B13FDF300C3D1EF /* SQLOperationManager.m */; };
 		B3AB5ABD1B0B0F940011FAEA /* CLNewAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3AB5ABC1B0B0F940011FAEA /* CLNewAlertView.m */; };
 		B3B96F1C1B02F9480036ED34 /* RegistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B96F1B1B02F9480036ED34 /* RegistModel.m */; };
 		B3B96F201B02FCB30036ED34 /* BuyerRegistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B96F1F1B02FCB30036ED34 /* BuyerRegistModel.m */; };
@@ -102,6 +103,7 @@
 		B3C6A2B71B12C3FD0036734B /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3C6A2B31B12C3FD0036734B /* libEaseMobClientSDK.a */; };
 		B3C6A2B91B12C3FD0036734B /* EaseMob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3C6A2B61B12C3FD0036734B /* EaseMob.bundle */; };
 		B3C70F8B1B09D2D400EF387E /* BrandQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C70F8A1B09D2D400EF387E /* BrandQueryModel.m */; };
+		B3D330E81B13256F00124592 /* WantBuyCar.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B3D330E71B13256F00124592 /* WantBuyCar.sqlite */; };
 		B3DCD53B1B043A5400B0A324 /* RegistBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DCD53A1B043A5400B0A324 /* RegistBaseViewController.m */; };
 		B3ED7DB71B0EBC3A0023FD81 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3ED7DAC1B0EBC3A0023FD81 /* libWeiboSDK.a */; };
 		B3ED7DB81B0EBC3A0023FD81 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3ED7DB41B0EBC3A0023FD81 /* WeiboSDK.bundle */; };
@@ -291,6 +293,8 @@
 		B343DCFB1B0D7FE800DB672C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B35AF0E71B09E51000079369 /* SUBBrandQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBBrandQueryModel.h; sourceTree = "<group>"; };
 		B35AF0E81B09E51000079369 /* SUBBrandQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBBrandQueryModel.m; sourceTree = "<group>"; };
+		B39125DB1B13FDF300C3D1EF /* SQLOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLOperationManager.h; sourceTree = "<group>"; };
+		B39125DC1B13FDF300C3D1EF /* SQLOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLOperationManager.m; sourceTree = "<group>"; };
 		B3A8B4241B0B37BD005BECB6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B3A8B4261B0B37C8005BECB6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B3A8B4281B0B37DB005BECB6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -394,6 +398,7 @@
 		B3C6A2B61B12C3FD0036734B /* EaseMob.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseMob.bundle; sourceTree = "<group>"; };
 		B3C70F891B09D2D400EF387E /* BrandQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandQueryModel.h; sourceTree = "<group>"; };
 		B3C70F8A1B09D2D400EF387E /* BrandQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandQueryModel.m; sourceTree = "<group>"; };
+		B3D330E71B13256F00124592 /* WantBuyCar.sqlite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WantBuyCar.sqlite; sourceTree = "<group>"; };
 		B3DCD5391B043A5400B0A324 /* RegistBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistBaseViewController.h; sourceTree = "<group>"; };
 		B3DCD53A1B043A5400B0A324 /* RegistBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistBaseViewController.m; sourceTree = "<group>"; };
 		B3ED7DAC1B0EBC3A0023FD81 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
@@ -548,6 +553,7 @@
 		B32770BC1B008B150061F148 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B3D330E71B13256F00124592 /* WantBuyCar.sqlite */,
 				B32771111B008D640061F148 /* TestChat.plist */,
 				B32771121B008D640061F148 /* TestComment.plist */,
 				B32770BD1B008B150061F148 /* Info.plist */,
@@ -585,6 +591,7 @@
 		B32770E31B008BA50061F148 /* 通用 */ = {
 			isa = PBXGroup;
 			children = (
+				B3D330E91B1326D900124592 /* 数据库 */,
 				B327710D1B008D020061F148 /* 导航栏 */,
 				B32771061B008CE60061F148 /* 分段按钮 */,
 				B32771021B008CC40061F148 /* 警示视图 */,
@@ -1474,6 +1481,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		B3D330E91B1326D900124592 /* 数据库 */ = {
+			isa = PBXGroup;
+			children = (
+				B39125DB1B13FDF300C3D1EF /* SQLOperationManager.h */,
+				B39125DC1B13FDF300C3D1EF /* SQLOperationManager.m */,
+			);
+			name = "数据库";
+			sourceTree = "<group>";
+		};
 		B3DCD5381B043A2900B0A324 /* 基本注册控制器 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1694,6 +1710,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B33CB9BD1B0EDA22004F142A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				B3D330E81B13256F00124592 /* WantBuyCar.sqlite in Resources */,
 				B32771131B008D640061F148 /* TestChat.plist in Resources */,
 				B3ED7DB81B0EBC3A0023FD81 /* WeiboSDK.bundle in Resources */,
 				B32770CA1B008B150061F148 /* Images.xcassets in Resources */,
@@ -1731,6 +1748,7 @@
 				B35AF0E91B09E51000079369 /* SUBBrandQueryModel.m in Sources */,
 				B327715C1B0091130061F148 /* ChatRecordTableViewCell.m in Sources */,
 				B3F202091B04817300C5F58D /* UIView+WebCacheOperation.m in Sources */,
+				B39125DD1B13FDF300C3D1EF /* SQLOperationManager.m in Sources */,
 				B3F201FC1B04817300C5F58D /* SDImageCache.m in Sources */,
 				B32771CF1B0098D20061F148 /* EmojiTransport.m in Sources */,
 				B3F202021B04817300C5F58D /* SDWebImagePrefetcher.m in Sources */,

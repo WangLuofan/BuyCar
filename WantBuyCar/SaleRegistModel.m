@@ -10,24 +10,6 @@
 
 @implementation SaleRegistModel
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
-    if(self) {
-        self.companyString = (NSString*)[aDecoder decodeObjectForKey:@"companyString"];
-        self.brandString = (NSString*)[aDecoder decodeObjectForKey:@"brandString"];
-    }
-    
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:self.companyString forKey:@"companyString"];
-    [aCoder encodeObject:self.brandString forKey:@"brandString"];
-    return ;
-}
-
 -(RegistErrorType)setUserInfoWithDictionary:(NSDictionary *)userInfo {
     RegistErrorType errorType = [super setUserInfoWithDictionary:userInfo];
     

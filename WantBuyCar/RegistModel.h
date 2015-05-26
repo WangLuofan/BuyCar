@@ -20,12 +20,14 @@ typedef enum {
     ErrorTypeFileWriteError                         //文件写入错误
 }RegistErrorType;
 
-@interface RegistModel : NSObject <NSCoding>
+@interface RegistModel : NSObject
 
-@property(nonatomic,copy) NSString* headerImageURL;
+@property(nonatomic,copy) UIImage* headerImage;
 @property(nonatomic,copy) NSString* userName;
 @property(nonatomic,copy) NSString* phoneNumber;
 @property(nonatomic,copy) NSString* password;
+@property(nonatomic,assign) NSInteger registType;
+@property(nonatomic,assign) NSInteger genderInfo;
 
 -(RegistErrorType)setUserInfoWithDictionary:(NSDictionary*)userInfo;
 -(BOOL)isTextValidWithRegex:(NSString*)regex text:(NSString*)text;

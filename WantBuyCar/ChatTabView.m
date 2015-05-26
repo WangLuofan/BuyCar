@@ -91,21 +91,22 @@
 
 -(void)faceButtonClicked:(UIButton*)sender {
     EmojiKeyboardView* keyboard = [[EmojiKeyboardView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kEmojiKeyboardHeight, kScreenWidth, kEmojiKeyboardHeight) keyBoardView:self];
+
+    UIView* oldInputView = [messageTextView inputView];
     
-    [UIView animateWithDuration:kAnimateInterval animations:^{
-        [messageTextView resignFirstResponder];
-        UIView* oldInputView = [messageTextView inputView];
-        [messageTextView setInputView:keyboard];
-        [messageTextView becomeFirstResponder];
-        [messageTextView setInputView:oldInputView];
-    }];
+    [messageTextView resignFirstResponder];
+    [messageTextView setInputView:keyboard];
+    [messageTextView becomeFirstResponder];
+    [messageTextView setInputView:oldInputView];
 
     return ;
 }
 
 -(void)keyboardShowNotification:(NSNotification*)notification {
     CGSize keyBoardSize=[notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
     [self setFrame:CGRectMake(self.frame.origin.x, chatTabViewRect.origin.y-keyBoardSize.height, self.frame.size.width, self.frame.size.height)];
+
     return ;
 }
 

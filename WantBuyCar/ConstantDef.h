@@ -70,11 +70,17 @@
 #define kWXAppSecret @"512e0d81f45b1e8aa69401e06a3471c1"
 
 //接口地址
-#define kApiUrl @"http://120.25.123.209:9090/api/vehicle"
-#define kImageUrl(FILENAME,W,H) [NSString stringWithFormat:@"%@/getimage?file=%@&w=%d&h=%d",(kApiUrl),(FILENAME),(W),(H)]
+#define kVehicleApiUrl @"http://120.25.123.209:9090/api/vehicle"
+#define kUserApiUrl @"http://120.25.123.209:9090/api/user"
+#define kImageUrl(FILENAME,W,H) [NSString stringWithFormat:@"%@/getimage?file=%@&w=%d&h=%d",(kVehicleApiUrl),(FILENAME),(W),(H)]
 
 //自定义通知
 #define kRequestCompletionNotification @"RequestCompletionNotification"
+#define kUserRegistCompletionNotification @"UserRegistCompletionNotification"
 #define kUserInfoRequestCompletionNotification @"UserInfoRequestCompletionNotification"
+#define kUserLoginRequestCompletionNotification @"UserLoginRequestCompletionNotification"
+
+//数据库
+#define kUserDatabaseName @"user_info"
 
 #endif

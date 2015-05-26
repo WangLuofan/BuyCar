@@ -11,16 +11,21 @@
 #import "RegistItemView.h"
 #import "RegistModel.h"
 #import "CommAlgorithm.h"
-#import "CLAlertView.h"
 #import "BuyerRegistModel.h"
 #import "SaleRegistModel.h"
+#import "CLSegmentedControl.h"
+#import "NetworkingOperation.h"
+#import "MBProgressHUD.h"
 #import "RegistBaseViewController.h"
 
 @class BuyCarViewController;
 @class SalerRegistViewController;
 
-@interface RegistBaseViewController () {
+@interface RegistBaseViewController ()<CLAlertViewDelegate> {
     CGPoint viewCenterPoint;
+    RegistModel* registModel;
+    CLSegmentedControl* segmentCtrl;
+    MBProgressHUD* progressHUD;
 }
 
 @end
@@ -31,7 +36,10 @@
     [super viewDidLoad];
     
     viewCenterPoint=[self.view center];
-    self.registItemArray = [[NSMutableArray alloc] init];
+    self.registItemDict = [[NSMutableDictionary alloc] init];
+    
+    progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [progressHUD setDetailsLabelText:@"正在向服务器提交信息，请稍等..."];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(leftBarButtonItemPressed:)];
     
@@ -45,12 +53,13 @@
     return ;
 }
 
--(void) addControlsWithArray:(NSArray *)contentArray yOrigin:(CGFloat)yOrigin{
+-(void) addControlsWithArray:(NSArray *)contentArray {
     //上传照片按钮
     RegistButton* headerButton=[[RegistButton alloc] initWithFrame:CGRectMake(0, 0, 100, 80)];
     [headerButton setCenter:CGPointMake(kScreenWidth/2, 110)];
     [headerButton setImage:[UIImage imageNamed:@"head"] forState:UIControlStateNormal];
     [headerButton setRegistButtonType:RegistButtonType_Upload];
+    [headerButton setHeaderImage:headerButton.imageView.image];
     NSAttributedString* attributedString=[[NSAttributedString alloc] initWithString:@"请上传您的寸照"
         attributes:@{
                      NSForegroundColorAttributeName:[UIColor colorWithRed:0.984 green:0.463 blue:0.259 alpha:1.0f],
@@ -59,17 +68,19 @@
                      NSUnderlineColorAttributeName:[UIColor colorWithRed:0.984 green:0.463 blue:0.259 alpha:1.0f]
                      }];
     [headerButton setAttributedTitle:attributedString forState:UIControlStateNormal];
-    [self.registItemArray addObject:headerButton];
-    
+    [self.registItemDict setValue:headerButton forKey:@"headerButton"];
     [self.view addSubview:headerButton];
-
     
-    int yPoint = headerButton.frame.origin.y+headerButton.bounds.size.height;
-    yPoint = (yOrigin == 0 ? yPoint : yOrigin);
+    segmentCtrl=[[CLSegmentedControl alloc] initWithFrame:CGRectMake(20, 160, self.view.frame.size.width-40 ,40) style:CLSegmentedControlStyleRect];
+    [segmentCtrl addItemByTitle:@"男" Image:@"male"];
+    [segmentCtrl addItemByTitle:@"女" Image:@"female"];
+    [self.view addSubview:segmentCtrl];
+
+    int yPoint = segmentCtrl.frame.origin.y+segmentCtrl.bounds.size.height+5;
     for(int i=0;i!=contentArray.count;++i) {
         RegistItemView* item=[[RegistItemView alloc] initWithFrame:CGRectMake(20, yPoint+50*i, self.view.bounds.size.width-40, 50)];
         [item setLabelText:contentArray[i][0] TextFieldPlaceHolder:contentArray[i][1] isSecurity:[contentArray[i][2] isEqualToString:@"1"] isNumpad:[contentArray[i][3] isEqualToString:@"1"]];
-        [self.registItemArray addObject:item];
+        [self.registItemDict setValue:item forKey:[contentArray[i] lastObject]];
         
         [self.view addSubview:item];
     }
@@ -87,20 +98,83 @@
 }
 
 -(RegistErrorType)registUserWithDictionary:(NSDictionary *)userInfoDict userType:(RegistType)userType{
-    RegistModel* registModel = nil;
-    if(userType == RegistType_Buyer)
+    if(userType == RegistType_Buyer) {
         registModel = [[BuyerRegistModel alloc] init];
-    else
+        [registModel setRegistType:1];
+    }
+    else {
         registModel = [[SaleRegistModel alloc] init];
+        [registModel setRegistType:2];
+    }
+    
+    registModel.genderInfo = ([segmentCtrl selectedItemByIndex]==0?1:0);
     
     RegistErrorType errorType = [registModel setUserInfoWithDictionary:userInfoDict];
     
-    //保存用户信息
-    NSString* docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    if(![NSKeyedArchiver archiveRootObject:registModel toFile:[NSString stringWithFormat:@"%@/userInfo.plist",docDir]])
-        return ErrorTypeFileWriteError;
+    NSDictionary* params = @{
+                             @"username":registModel.userName,
+                             @"password":registModel.password,
+                             @"confirm":registModel.password
+                             };
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRegistCompletionNotification:) name:kUserRegistCompletionNotification object:nil];
+    [NetworkingOperation sendPOSTRequestWithUrl:[NSString stringWithFormat:@"%@/register",kUserApiUrl] params:params notificationName:kUserRegistCompletionNotification];
     
     return errorType;
+}
+
+-(void)userRegistCompletionNotification:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserRegistCompletionNotification object:nil];
+    NSString* message = [notification.userInfo[@"message"] stringValue];
+    
+    if(![message isEqualToString:@"ok"]) {
+        self.alertView = [[CLAlertView alloc] initWithTitle:@"错误" frame:CGRectZero message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [self.alertView show];
+        return ;
+    }
+    
+    NSString* userToken = [notification.userInfo[@"result"][@"usertoken"] stringValue];
+    
+    NSDictionary* params = nil;
+    if(registModel.registType == 1) {
+        params = @{
+                   @"usertoken":userToken,
+                   @"photo":[CommAlgorithm encodingImageWithUIImage:registModel.headerImage],
+                   @"phone":registModel.phoneNumber,
+                   @"realname":registModel.userName,
+                   @"gender":[NSNumber numberWithInteger:registModel.genderInfo],
+                   @"email":((BuyerRegistModel*)registModel).mailString
+                   };
+    }
+    else {
+        params = @{
+                   @"usertoken":userToken,
+                   @"photo":[CommAlgorithm encodingImageWithUIImage:registModel.headerImage],
+                   @"phone":registModel.phoneNumber,
+                   @"realname":registModel.userName,
+                   @"gender":[NSNumber numberWithInteger:registModel.genderInfo],
+                   @"company":((SaleRegistModel*)registModel).companyString,
+                   @"brand":((SaleRegistModel*)registModel).brandString
+                   };
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoRequestCompletionNotification:) name:kUserInfoRequestCompletionNotification object:nil];
+    [NetworkingOperation sendPOSTRequestWithUrl:[NSString stringWithFormat:@"%@/setprofile",kUserApiUrl] params:params notificationName:kUserInfoRequestCompletionNotification];
+    
+    return ;
+}
+
+-(void)userInfoRequestCompletionNotification:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserInfoRequestCompletionNotification object:nil];
+    NSString* message = [notification.userInfo[@"message"] stringValue];
+    if(![message isEqualToString:@"ok"]) {
+        self.alertView = [[CLAlertView alloc] initWithTitle:@"错误" frame:CGRectZero message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [self.alertView show];
+    }else{
+        self.alertView = [[CLAlertView alloc] initWithTitle:@"消息" frame:CGRectZero message:@"恭喜你，注册成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [self.alertView show];
+    }
+    return ;
 }
 
 -(NSString*)formatErrorInfo:(RegistErrorType)errorType {
@@ -134,7 +208,7 @@
 }
 
 -(void)completeRegistBtnClicked:(UIButton*)sender {
-
+    [progressHUD show:YES];
     return ;
 }
 
@@ -201,6 +275,12 @@
     for (UIView* view in self.view.subviews) {
         [view resignFirstResponder];
     }
+    return ;
+}
+
+-(void)alertView:(CLAlertView *)alertView buttonPressedIndex:(NSInteger)buttonPressedIndex {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
     return ;
 }
 

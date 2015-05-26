@@ -26,5 +26,6 @@ typedef enum {
 
 -(instancetype)initWithFrame:(CGRect)frame style:(CLSegmentedControlStyle)style;
 -(void)addItemByTitle:(NSString*)title Image:(NSString*)image;
+-(NSInteger)selectedItemByIndex;
 
 @end

@@ -27,16 +27,21 @@
     // Do any additional setup after loading the view.
     [self setTitle:@"卖家注册"];
     
+    //0 字段名
+    //1 提示信息
+    //2 是否密码信息
+    //3 是否为全数字键盘
+    //4 键名
     NSArray* contentArray=@[
-                            @[@"姓名",@"姓名或者昵称",@"0",@"0"],
-                            @[@"单位",@"登陆用户名",@"0",@"0"],
-                            @[@"联系方式",@"仅对好友公开",@"0",@"1"],
-                            @[@"经营品牌",@"选择后，则APP推送到最新询价",@"0",@"0"],
-                            @[@"登陆密码",@"六位数字、字母或者下划线",@"1",@"0"],
-                            @[@"确认密码",@"再次输入登陆密码",@"1",@"0"]
+                            @[@"姓名",@"姓名或者昵称",@"0",@"0",@"name"],
+                            @[@"单位",@"登陆用户名",@"0",@"0",@"company"],
+                            @[@"联系方式",@"仅对好友公开",@"0",@"1",@"phone"],
+                            @[@"经营品牌",@"选择后，则APP推送到最新询价",@"0",@"0",@"brand"],
+                            @[@"登陆密码",@"六位数字、字母或者下划线",@"1",@"0",@"password"],
+                            @[@"确认密码",@"再次输入登陆密码",@"1",@"0",@"confirmPassword"]
                          ];
     
-    [self addControlsWithArray:contentArray yOrigin:0];
+    [self addControlsWithArray:contentArray];
 }
 
 //-(void) addAllControls {
@@ -84,13 +89,13 @@
 //}
 
 -(void)completeRegistBtnClicked:(UIButton*)sender {
-    NSDictionary* dict = @{@"headerImageURL":((RegistButton*)self.registItemArray[0]).imageReferenceURL,
-                           @"userName":[((RegistItemView*)self.registItemArray[1]) contentText],
-                           @"companyString":[((RegistItemView*)self.registItemArray[2]) contentText],
-                           @"phoneNumber":[((RegistItemView*)self.registItemArray[3]) contentText],
-                           @"brandString:":[((RegistItemView*)self.registItemArray[4])contentText],
-                           @"firstPassword":[((RegistItemView*)self.registItemArray[5]) contentText],
-                           @"secondPassword":[((RegistItemView*)self.registItemArray[6]) contentText]};
+    NSDictionary* dict = @{@"headerImage":((RegistButton*)self.registItemDict[@"headerButton"]).headerImage,
+                           @"userName":[((RegistItemView*)self.registItemDict[@"name"]) contentText],
+                           @"companyString":[((RegistItemView*)self.registItemDict[@"company"]) contentText],
+                           @"phoneNumber":[((RegistItemView*)self.registItemDict[@"phone"]) contentText],
+                           @"brandString:":[((RegistItemView*)self.registItemDict[@"brand"])contentText],
+                           @"firstPassword":[((RegistItemView*)self.registItemDict[@"password"]) contentText],
+                           @"secondPassword":[((RegistItemView*)self.registItemDict[@"confirmPassword"]) contentText]};
     NSString* message = [self formatErrorInfo:[self registUserWithDictionary:dict userType:RegistType_Buyer]];
     
     if(message.length!=0) {

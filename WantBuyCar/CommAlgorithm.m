@@ -32,4 +32,14 @@
     return theImage;
 }
 
++(NSData *)encodingImageWithUIImage:(UIImage *)image {
+    NSData* data = UIImageJPEGRepresentation(image,1.0f);
+    return [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
++(UIImage *)decodingImageWithData:(NSData *)imgData {
+    NSData* data = [[NSData alloc] initWithBase64EncodedData:imgData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return [UIImage imageWithData:data];
+}
+
 @end

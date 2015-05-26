@@ -52,7 +52,7 @@
 }
 
 -(NSString *)contentText {
-    return contentTextField.text;
+    return [contentTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

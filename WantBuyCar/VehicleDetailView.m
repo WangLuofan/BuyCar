@@ -118,7 +118,7 @@
 }
 
 -(void)refreshTableViewDataWithBrandName:(NSString *)brandName {
-    [NetworkingOperation sendJSONRequestWithUrl:[NSString stringWithFormat:@"%@/getvehicle?brand=%@",kApiUrl,brandName]];
+    [NetworkingOperation sendJSONRequestWithUrl:[NSString stringWithFormat:@"%@/getvehicle?brand=%@",kVehicleApiUrl,brandName] notificationName:kRequestCompletionNotification];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestCompletionNotification:) name:kRequestCompletionNotification object:nil];
     return ;
 }

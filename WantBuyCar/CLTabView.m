@@ -19,15 +19,18 @@
 
 -(void)addTabItemByTitle:(NSString *)title Image:(NSString*)image SelectedImage:(NSString*)selectedImage {
     CLTabItem* tabItem=[CLTabItem buttonWithType:UIButtonTypeCustom];
+    
     [tabItem setTitle:title forState:UIControlStateNormal];
     [tabItem setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     [tabItem setImage:[UIImage imageNamed:image] forState:UIControlStateHighlighted];
     [tabItem setImage:[UIImage imageNamed:selectedImage] forState:UIControlStateSelected];
     [tabItem addTarget:self action:@selector(tabItemPressed:) forControlEvents:UIControlEventTouchDown];
+    
     [self addSubview:tabItem];
     
     int index=0;
     CGFloat kWidth=self.bounds.size.width/self.subviews.count;
+    
     for (UIView* subView in self.subviews) {
         [subView setTag:index];
         [subView setFrame:CGRectMake((index++)*kWidth, 0, kWidth, self.bounds.size.height)];

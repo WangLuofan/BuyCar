@@ -49,7 +49,7 @@
 
 -(void)initVehicleTable {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestCompletionRequest:) name:kRequestCompletionNotification object:nil];
-    [NetworkingOperation sendJSONRequestWithUrl:[NSString stringWithFormat:@"%@/getbrand",kApiUrl]];
+    [NetworkingOperation sendJSONRequestWithUrl:[NSString stringWithFormat:@"%@/getbrand",kVehicleApiUrl] notificationName:kRequestCompletionNotification];
     return ;
 }
 

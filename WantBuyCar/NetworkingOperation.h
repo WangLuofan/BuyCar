@@ -10,8 +10,8 @@
 
 @interface NetworkingOperation : NSObject
 
-+(void)sendJSONRequestWithUrl:(NSString*)urlString;
-+(void)sendGETRequestWithUrl:(NSString*)urlString params:(NSDictionary*)params;
-+(void)sendPOSTRequestWithUrl:(NSString*)urlString params:(NSDictionary*)params;
++(void)sendJSONRequestWithUrl:(NSString*)urlString notificationName:(NSString*)notificationName;
++(void)sendGETRequestWithUrl:(NSString*)urlString params:(NSDictionary*)params notificationName:(NSString*)notificationName;
++(void)sendPOSTRequestWithUrl:(NSString*)urlString params:(NSDictionary*)params notificationName:(NSString*)notificationName;
 
 @end

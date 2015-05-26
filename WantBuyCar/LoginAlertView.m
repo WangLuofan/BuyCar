@@ -151,7 +151,7 @@
 }
 
 -(NSDictionary *)getUserInfoDict {
-   return @{@"userName":userNameText.text,@"password":passwordText.text};
+   return @{@"username":userNameText.text,@"password":passwordText.text};
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {

@@ -13,7 +13,6 @@
 #import "ConstantDef.h"
 #import "EMSDKFull.h"
 #import "WeiboSDK.h"
-#import "NetworkingOperation.h"
 #import "WXApi.h"
 #import "NetworkingOperation.h"
 
@@ -53,6 +52,7 @@
     
     [[NSUserDefaults standardUserDefaults] setValue:newVersion forKey:@"CurrentBundleVersion"];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -104,7 +104,7 @@
             [[NSUserDefaults standardUserDefaults] setValue:[((WBAuthorizeResponse*)response) accessToken] forKey:@"access_token"];
             NSDictionary* params = @{@"source":kSinaAppKey,@"uid":[((WBAuthorizeResponse*)response) userID],@"access_token":[((WBAuthorizeResponse*)response) accessToken]};
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestCompletionRequest:) name:kRequestCompletionNotification object:nil];
-            [NetworkingOperation sendGETRequestWithUrl:kSinaUserInfoRequestURI params:params];
+            [NetworkingOperation sendGETRequestWithUrl:kSinaUserInfoRequestURI params:params notificationName:kRequestCompletionNotification];
         }
     }
     return ;
@@ -158,7 +158,7 @@
                                                            @"secret":kWXAppSecret,
                                                            @"code":code,
                                                            @"grant_type":@"authorization_code"
-                                                            }];
+                                                            } notificationName:kRequestCompletionNotification];
     return ;
 }
 
@@ -171,7 +171,7 @@
     [NetworkingOperation sendGETRequestWithUrl:url params:@{
                                                             @"access_token":accessToken,
                                                             @"openid":openID
-                                                            }];
+                                                            } notificationName:kRequestCompletionNotification];
     return ;
 }
 

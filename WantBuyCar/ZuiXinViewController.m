@@ -9,6 +9,7 @@
 #import "RegistViewController.h"
 #import "CLNavigationViewController.h"
 #import "NewestViewController.h"
+#import "NetworkingOperation.h"
 #import "ZuiXinViewController.h"
 #import "MenuCoverView.h"
 #import "MenuItemView.h"
@@ -102,8 +103,13 @@
         case 2:
         {
             CLNavigationViewController* setupNavigation=[[CLNavigationViewController alloc] initWithRootViewController:[[SetUpTableViewController alloc] initWithStyle:UITableViewStylePlain]];
-            [self presentViewController:setupNavigation animated:YES completion:^{
-            }];
+            if([menuItemView isLoginSuccessful])
+                [self presentViewController:setupNavigation animated:YES completion:^{
+                }];
+            else {
+                loginResultAlertView = [[CLAlertView alloc] initWithTitle:@"错误" frame:CGRectZero message:@"请您先登陆" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [loginResultAlertView show];
+            }
         }
             break;
             
@@ -241,14 +247,24 @@
     if([alertView isKindOfClass:[LoginAlertView class]]) {
         if(buttonPressedIndex == 1) {
             NSDictionary* userInfo = [((LoginAlertView*)alertView) getUserInfoDict];
-            NSString* docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            BuyerRegistModel* buyerModel = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSString stringWithFormat:@"%@/userInfo.plist",docDir]];
-            if([userInfo[@"userName"] isEqualToString:buyerModel.userName]&&[userInfo[@"password"] isEqualToString:buyerModel.password]){
-                [self setLoginInfoWithURL:buyerModel.headerImageURL userName:buyerModel.userName uSid:nil];
-            }
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginRequestCompletionNotification:) name:kUserLoginRequestCompletionNotification object:nil];
+            [NetworkingOperation sendPOSTRequestWithUrl:[NSString stringWithFormat:@"%@/login",kUserApiUrl] params:userInfo notificationName:kUserLoginRequestCompletionNotification];
         }
     }
     
+    return ;
+}
+
+-(void)userLoginRequestCompletionNotification:(NSNotification*)notification {
+    NSString* message = [notification.userInfo[@"message"] stringValue];
+    if([message isEqualToString:@"ok"]) {
+        NSString* usertoken = [notification.userInfo[@"result"][@"usertoken"] stringValue];
+        [[NSUserDefaults standardUserDefaults] setValue:usertoken forKey:@"usertoken"];
+        [menuItemView setIsLoginSuccessful:YES];
+    }else{
+        loginResultAlertView = [[CLAlertView alloc] initWithTitle:@"登陆失败" frame:CGRectZero message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [loginResultAlertView show];
+    }
     return ;
 }
 

@@ -177,10 +177,10 @@
 }
 
 -(void)keyboardHideNotification:(NSNotification*)notification {
-    if(!bAlreadyAdjusted)
+    if(bAlreadyAdjusted)
         return ;
     [self setCenter:CGPointMake(self.center.x, self.center.y+100)];
-    bAlreadyAdjusted = NO;
+    bAlreadyAdjusted = YES;
     return ;
 }
 

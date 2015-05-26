@@ -24,7 +24,7 @@
     self = [super initWithFrame:frame];
     
     if(self) {
-        self.imageReferenceURL = @"";
+        self.headerImage = nil;
         [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
         [self setContentMode:UIViewContentModeCenter];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -108,7 +108,7 @@
     UIImage* sourceImage = (UIImage*)info[UIImagePickerControllerOriginalImage];
     [picker dismissViewControllerAnimated:YES completion:^{
         [self setImage:sourceImage forState:UIControlStateNormal];
-        self.imageReferenceURL = [NSString stringWithFormat:@"%@",(NSURL*)info[UIImagePickerControllerReferenceURL]];
+        self.headerImage = sourceImage;
     }];
     return ;
 }

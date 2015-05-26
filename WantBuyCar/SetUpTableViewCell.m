@@ -20,7 +20,6 @@
         [seperatorTop setFrame:CGRectMake(0, 10.5f, self.frame.size.width, 0.5f)];
         [self addSubview:seperatorTop];
         
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         [self setFrame:CGRectMake(0, 0, kScreenWidth, 80)];
         
         self.headerImageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 40, 40)];

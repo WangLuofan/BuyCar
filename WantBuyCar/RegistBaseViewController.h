@@ -15,12 +15,12 @@ typedef enum {
 
 @interface RegistBaseViewController : UIViewController
 
--(void)addControlsWithArray:(NSArray*)contentArray yOrigin:(CGFloat)yOrigin;
+-(void)addControlsWithArray:(NSArray*)contentArray;
 -(RegistErrorType)registUserWithDictionary:(NSDictionary*)userInfoDict userType:(RegistType)userType;
 -(void)completeRegistBtnClicked:(UIButton*)sender;
 -(NSString*)formatErrorInfo:(RegistErrorType)errorType;
 
+@property(nonatomic,strong) NSMutableDictionary* registItemDict;
 @property(nonatomic,strong) CLAlertView* alertView;
-@property(nonatomic,strong) NSMutableArray* registItemArray;
 
 @end
