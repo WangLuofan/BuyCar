@@ -45,13 +45,13 @@
     [self.controlView addSubview:seperatorLogin];
     
     //用户名
-    UILabel* userNameLabel=[[UILabel alloc] initWithFrame:CGRectMake(15, 55, 100, 20)];
+    UILabel* userNameLabel=[[UILabel alloc] initWithFrame:CGRectMake(15, 55, 60, 20)];
     [userNameLabel setText:@"用户名"];
     [userNameLabel setTextColor:[UIColor colorWithRed:0.494 green:0.502 blue:0.506 alpha:1.0]];
     [self.controlView addSubview:userNameLabel];
     
     //用户名输入框
-    userNameText=[[UITextField alloc] initWithFrame:CGRectMake(120, 55, 100, 20)];
+    userNameText=[[UITextField alloc] initWithFrame:CGRectMake(80, 55, self.controlView.frame.size.width-100, 20)];
     [userNameText setPlaceholder:@"登陆用户名"];
     [userNameText setDelegate:self];
     [userNameText setAdjustsFontSizeToFitWidth:YES];
@@ -63,13 +63,13 @@
     [self.controlView addSubview:seperatorUserName];
     
     //密码
-    UILabel* passwordLabel=[[UILabel alloc] initWithFrame:CGRectMake(15, 105, 100, 20)];
+    UILabel* passwordLabel=[[UILabel alloc] initWithFrame:CGRectMake(15, 105, 60, 20)];
     [passwordLabel setText:@"密码"];
     [passwordLabel setTextColor:[UIColor colorWithRed:0.494 green:0.502 blue:0.506 alpha:1.0]];
     [self.controlView addSubview:passwordLabel];
     
     //密码输入框
-    passwordText=[[UITextField alloc] initWithFrame:CGRectMake(120, 105, 100, 20)];
+    passwordText=[[UITextField alloc] initWithFrame:CGRectMake(80, 105, self.controlView.frame.size.width-100, 20)];
     [passwordText setPlaceholder:@"登陆密码"];
     [passwordText setSecureTextEntry:YES];
     [passwordText setDelegate:self];

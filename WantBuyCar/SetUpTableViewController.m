@@ -9,6 +9,7 @@
 #import "CLAlertView.h"
 #import "NetworkingOperation.h"
 #import "ConstantDef.h"
+#import "UIImageView+WebCache.h"
 #import "SetUpTableViewController.h"
 #import "SetUpTableViewCell.h"
 
@@ -59,9 +60,6 @@
                      @"3":@[@"about_set",@"关于",@"",@0],
                      @"4":@[@"logout_set",@"退出",@"",@0]
                      };
-    }else{
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
     }
     return ;
 }
@@ -88,7 +86,14 @@
         cell=[[SetUpTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SetUpCellIdentifier"];
     
     NSArray* contentArray=optionDict[[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-    [cell.headerImageView setImage:[UIImage imageNamed:contentArray[0]]];
+    if(indexPath.row == 0){
+        if([contentArray[0] stringValue] ==nil)
+            [cell.headerImageView setImage:[UIImage imageNamed:@"header_set"]];
+        else
+            [cell.headerImageView sd_setImageWithURL:contentArray[0] placeholderImage:[UIImage imageNamed:@"header_set"]];
+    }
+    else
+        [cell.headerImageView setImage:[UIImage imageNamed:contentArray[0]]];
     [cell.setOptionLabel setText:contentArray[1]];
     [cell.changeOptionLabel setText:contentArray[2]];
     if([contentArray[3] intValue]==1)
@@ -96,12 +101,7 @@
     else
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     
-    
     return cell;
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -11,7 +11,7 @@
 #import "ConstantDef.h"
 
 @interface CLAlertView ()<UITextFieldDelegate> {
-    BOOL bAlreadyAdjusted;
+    CGPoint controlViewCenter;
 }
 
 @end
@@ -19,34 +19,32 @@
 @implementation CLAlertView
 
 -(instancetype)initWithFrame:(CGRect)frame {
-    @autoreleasepool {
-    self             = [super initWithFrame:kScreenBounds];
+    self = [super initWithFrame:kScreenBounds];
 
-        if(self) {
+    if(self) {
+        [self setWindowLevel:UIWindowLevelAlert];
+        [self setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5f]];
+        if(self.controlView==nil) {
+            self.controlView = [[UIView alloc] initWithFrame:frame];
             [self setWindowLevel:UIWindowLevelAlert];
-            [self setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5f]];
-            if(self.controlView==nil) {
-                self.controlView = [[UIView alloc] initWithFrame:frame];
-                [self setWindowLevel:UIWindowLevelAlert];
-                [self.controlView.layer setCornerRadius:5.0f];
-                [self.controlView.layer masksToBounds];
-                [self.controlView setBackgroundColor:[UIColor colorWithRed:0.945 green:0.949 blue:0.957 alpha:1.0]];
-                [self.controlView setCenter:CGPointMake(kScreenWidth/2, kScreenHeight/2)];
-        }
-        [self addSubview:self.controlView];
-        //键盘通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShowNotification:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHideNotification:) name:UIKeyboardWillHideNotification object:nil];
-        }
-
-        return self;
+            [self.controlView.layer setCornerRadius:5.0f];
+            [self.controlView.layer masksToBounds];
+            [self.controlView setBackgroundColor:[UIColor colorWithRed:0.945 green:0.949 blue:0.957 alpha:1.0]];
+            [self.controlView setCenter:CGPointMake(kScreenWidth/2, kScreenHeight/2)];
+            controlViewCenter = [self.controlView center];
     }
+    [self addSubview:self.controlView];
+    //键盘通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+    }
+    return self;
 }
 
 -(instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame message:(NSString *)message delegate:(id<CLAlertViewDelegate>)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...NS_REQUIRES_NIL_TERMINATION {
 
     [self setWindowLevel:UIWindowLevelAlert];
-    self             = [super initWithFrame:kScreenBounds];
+    self = [super initWithFrame:kScreenBounds];
 
     if(self) {
         [self setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5f]];
@@ -62,6 +60,7 @@
         [self.controlView.layer masksToBounds];
         [self.controlView setBackgroundColor:[UIColor colorWithRed:0.945 green:0.949 blue:0.957 alpha:1.0]];
         [self.controlView setCenter:CGPointMake(kScreenWidth/2, kScreenHeight/2)];
+        controlViewCenter = [self.controlView center];
 
         //标题
         UILabel* titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 20)];
@@ -169,18 +168,13 @@
 }
 
 -(void)keyboardShowNotification:(NSNotification*)notification {
-    if(bAlreadyAdjusted)
-        return ;
-    [self setCenter:CGPointMake(self.center.x, self.center.y-100)];
-    bAlreadyAdjusted = YES;
+    CGSize keyboardSize = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    [self.controlView setCenter:CGPointMake(controlViewCenter.x, controlViewCenter.y - keyboardSize.height / 2)];
     return ;
 }
 
 -(void)keyboardHideNotification:(NSNotification*)notification {
-    if(bAlreadyAdjusted)
-        return ;
-    [self setCenter:CGPointMake(self.center.x, self.center.y+100)];
-    bAlreadyAdjusted = YES;
+    [self.controlView setCenter:CGPointMake(kScreenWidth/2, kScreenHeight/2)];
     return ;
 }
 

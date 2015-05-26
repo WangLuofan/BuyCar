@@ -103,7 +103,6 @@
 		B3C6A2B71B12C3FD0036734B /* libEaseMobClientSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3C6A2B31B12C3FD0036734B /* libEaseMobClientSDK.a */; };
 		B3C6A2B91B12C3FD0036734B /* EaseMob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3C6A2B61B12C3FD0036734B /* EaseMob.bundle */; };
 		B3C70F8B1B09D2D400EF387E /* BrandQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C70F8A1B09D2D400EF387E /* BrandQueryModel.m */; };
-		B3D330E81B13256F00124592 /* WantBuyCar.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = B3D330E71B13256F00124592 /* WantBuyCar.sqlite */; };
 		B3DCD53B1B043A5400B0A324 /* RegistBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DCD53A1B043A5400B0A324 /* RegistBaseViewController.m */; };
 		B3ED7DB71B0EBC3A0023FD81 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3ED7DAC1B0EBC3A0023FD81 /* libWeiboSDK.a */; };
 		B3ED7DB81B0EBC3A0023FD81 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3ED7DB41B0EBC3A0023FD81 /* WeiboSDK.bundle */; };
@@ -398,7 +397,6 @@
 		B3C6A2B61B12C3FD0036734B /* EaseMob.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseMob.bundle; sourceTree = "<group>"; };
 		B3C70F891B09D2D400EF387E /* BrandQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandQueryModel.h; sourceTree = "<group>"; };
 		B3C70F8A1B09D2D400EF387E /* BrandQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandQueryModel.m; sourceTree = "<group>"; };
-		B3D330E71B13256F00124592 /* WantBuyCar.sqlite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WantBuyCar.sqlite; sourceTree = "<group>"; };
 		B3DCD5391B043A5400B0A324 /* RegistBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistBaseViewController.h; sourceTree = "<group>"; };
 		B3DCD53A1B043A5400B0A324 /* RegistBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistBaseViewController.m; sourceTree = "<group>"; };
 		B3ED7DAC1B0EBC3A0023FD81 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
@@ -553,7 +551,6 @@
 		B32770BC1B008B150061F148 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B3D330E71B13256F00124592 /* WantBuyCar.sqlite */,
 				B32771111B008D640061F148 /* TestChat.plist */,
 				B32771121B008D640061F148 /* TestComment.plist */,
 				B32770BD1B008B150061F148 /* Info.plist */,
@@ -1710,7 +1707,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B33CB9BD1B0EDA22004F142A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				B3D330E81B13256F00124592 /* WantBuyCar.sqlite in Resources */,
 				B32771131B008D640061F148 /* TestChat.plist in Resources */,
 				B3ED7DB81B0EBC3A0023FD81 /* WeiboSDK.bundle in Resources */,
 				B32770CA1B008B150061F148 /* Images.xcassets in Resources */,

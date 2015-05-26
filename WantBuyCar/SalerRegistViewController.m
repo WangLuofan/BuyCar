@@ -96,14 +96,12 @@
                            @"brandString:":[((RegistItemView*)self.registItemDict[@"brand"])contentText],
                            @"firstPassword":[((RegistItemView*)self.registItemDict[@"password"]) contentText],
                            @"secondPassword":[((RegistItemView*)self.registItemDict[@"confirmPassword"]) contentText]};
-    NSString* message = [self formatErrorInfo:[self registUserWithDictionary:dict userType:RegistType_Buyer]];
+    NSString* message = [self formatErrorInfo:[self registUserWithDictionary:dict userType:RegistType_Saler]];
     
     if(message.length!=0) {
         self.alertView = [[CLAlertView alloc] initWithTitle:@"错误" frame:CGRectMake(0, 0, 250, 200) message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [self.alertView show];
-    }else {
-        self.alertView = [[CLAlertView alloc] initWithTitle:@"成功" frame:CGRectMake(0, 0, 250, 200) message:@"恭喜你，注册成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [self.alertView show];
+        return ;
     }
     
     return ;

@@ -19,6 +19,13 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(leftButtonPressed:)];
+    return ;
+}
+
+-(void)leftButtonPressed:(UIBarButtonItem*)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
     return ;
 }
 

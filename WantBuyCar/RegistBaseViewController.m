@@ -171,6 +171,7 @@
         self.alertView = [[CLAlertView alloc] initWithTitle:@"错误" frame:CGRectZero message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [self.alertView show];
     }else{
+        [progressHUD hide:YES afterDelay:0.5f];
         self.alertView = [[CLAlertView alloc] initWithTitle:@"消息" frame:CGRectZero message:@"恭喜你，注册成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [self.alertView show];
     }
@@ -201,6 +202,7 @@
         case ErrorTypeFileWriteError:
             message = @"存储用户信息失败，注册不成功";
         default:
+            message = @"";
             break;
     }
     

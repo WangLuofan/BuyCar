@@ -54,6 +54,14 @@
     [[EaseMob sharedInstance].chatManager registerNewAccount:userName password:password error:&error];
     if([[EaseMob sharedInstance].chatManager loginWithUsername:userName password:password error:nil])
         NSLog(@"登陆成功");
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(leftButtonPressed:)];
+}
+
+-(void)leftButtonPressed:(UIBarButtonItem*)sender{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+    return ;
 }
 
 -(void)decodeChatInfo {
